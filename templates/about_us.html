@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - MediNULL</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .logo {
+      margin-left: 2rem;
+    }
+    body {
+      background: linear-gradient(135deg, #fff 0%, #cfcccc 50%, #b71c1c 150%);
+      color: #333;
+      font-family: 'Poppins', sans-serif;
+        }
+    .myimg {
+      width: 50px;
+      height: 50px;
+      border: 2px solid black;
+      border-radius: 25px;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fff;
+      color: #333;
+      margin: 0;
+    }
+    .team-banner {
+      text-align: center;
+      padding: 2rem;
+      background-color: #f4f4f4;
+    }
+    .team-banner img {
+      width: 200px;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .team-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
+    }
+    .card {
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      padding: 1.5rem;
+      width: 280px;
+      transition: transform 0.4s ease;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      background-color: antiquewhite;
+    }
+    .card img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 1rem auto;
+      display: block;
+    }
+    .social-icons a {
+      margin: 0 0.5rem;
+      color: #333;
+      font-size: 1.2rem;
+      transition: color 0.3s;
+    }
+    .social-icons a:hover {
+      color: blue;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.6);
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 60%;
+      position: relative;
+    }
+    .close {
+      position: absolute;
+      right: 20px;
+      top: 10px;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background-color: brown;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 20px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <div class="logo">
+      <img class="myimg" src="static/image.png" alt="Logo">
+    </div>
+    <a class="navbar-brand" href="#">MediAura</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
+        <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">About</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/about_us">About Us</a></li>
+            <li><a class="dropdown-item" href="/about_doctors">About Doctors</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<div class="text-center mt-5">
+  <h1 class="text-4xl text-primary">About Us &#x1F480</h1>
+</div>
+<div class="container mt-5">
+  <div class="row align-items-center">
+    <div class="col-md-6 text-center">
+      <img src="https://cdn-icons-png.flaticon.com/512/3774/3774299.png" alt="About image" class="img-fluid" style="max-width: 300px;">
+    </div>
+    <div class="col-md-6">
+      <h2 class="text-primary">Welcome to MediAura</h2>
+      <p>MediAura is an AI-powered medical assistant care system that enables seamless interaction between patients and doctors. Our system empowers users to check symptoms, monitor vital signs using IoT devices, and maintain medical records with ease.</p>
+      <p>We aim to reduce the gap between people and quality healthcare by using technology to provide fast, intelligent, and accessible solutions — anytime, anywhere.</p>
+    </div>
+  </div>
+</div>
+
+<section class="team-banner">
+  <h2>Meet the Team_NULL()</h2>
+  <p>We are a group of passionate students from the IoT and Robotics Engineering Department revolutionizing intelligent systems.</p>
+</section>
+
+<section class="team-cards">
+  <div class="card" onclick="openModal('modal1')">
+    <img src="static/rafiul.png" alt="Rafiul">
+    <h3>Rafiul Rabbi Zahid</h3>
+    <p>Department of IRE</p>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </div>
+  <div class="card" onclick="openModal('modal2')">
+    <img src="static/rakib.png" alt="Rakibul">
+    <h3>Rakibul Hasan Rakib</h3>
+    <p>Department of IRE</p>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </div>
+  <div class="card" onclick="openModal('modal3')">
+    <img src="static/iftekhar.png" alt="Iftekhar">
+    <h3>Iftekhar Rahman</h3>
+    <p>Department of IRE</p>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- Modals -->
+<div id="modal1" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('modal1')">&times;</span><h2>Rafiul Rabbi Zahid</h2><p><strong>Email:</strong> 2001004@iot.bdu.ac.bd</p><p>Backend developer and IoT enthusiast. Specializes in real-time systems and database-driven applications.</p></div></div>
+<div id="modal2" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('modal2')">&times;</span><h2>Rakibul Hasan Rakib</h2><p><strong>Email:</strong> 2001007@iot.bdu.ac.bd</p><p>Leads AI model development and research. Passionate about deep learning in healthcare analytics.</p></div></div>
+<div id="modal3" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('modal3')">&times;</span><h2>Iftekhar Rahman</h2><p><strong>Email:</strong> 2001012@iot.bdu.ac.bd</p><p>UI/UX designer creating smooth and human-centric designs for digital health solutions.</p></div></div>
+
+<section class="team-banner">
+  <h2>Our Projects</h2>
+  <p>Explore some of our latest innovations and contributions in IoT and Healthcare.</p>
+</section>
+
+<section class="team-cards">
+  <!-- Project 1 -->
+  <div class="card" onclick="openModal('project1')">
+    <img src="static/project1.png" alt="Smart Flood Monitoring System"/>
+    <h3>NULL-s-Weather-Irrigate-Hub</h3>
+    <p>Smart Flood Monitoring using IoT & GSM modules.</p>
+  </div>
+
+  <!-- Project 2 -->
+  <div class="card" onclick="openModal('project2')">
+    <img src="static/project2.png" alt="Vertical Farming System"/>
+    <h3>FarmIQ</h3>
+    <p>AI-powered Vertical Farming with ML-based crop insights.</p>
+  </div>
+
+  <!-- Project 3 -->
+  <div class="card" onclick="openModal('project3')">
+    <img src="static/project3.png" alt="KrishiHut"/>
+    <h3>KrishiHut</h3>
+    <p>An online marketplace for buyers and farmers without any middlewar </p>
+  </div>
+</section>
+
+<!-- Project Modals -->
+<div id="project1" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('project1')">&times;</span>
+    <h2>NULL Weather_Irrigate hub</h2>
+    <p>IoT-based weather monitoring. Integrated with soil moisture sensors for irrigation control.</p>
+    <p>Github link:<a href="https://github.com/rafiulzahid/NULL-s-Weather-Irrigate-Hub">NULL-s-Weather-Irrigate-Hub</a></p>
+  </div>
+</div>
+
+<div id="project2" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('project2')">&times;</span>
+    <h2>FarmIQ</h2>
+    <p>Intelligent vertical farming solution with real-time monitoring and disease detection using ML and camera-based imaging. Optimizes crop yield and water usage.</p>
+  </div>
+</div>
+
+<div id="project3" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('project3')">&times;</span>
+    <h2>KrishiHut</h2>
+    <p>Connecting farmers to nearby buyers/sellers through a web-based app. Features include live  booking, record keeping, and product management for remote area.</p>
+    <p>Github link:<a href="https://github.com/rhr007/Krishi_Hut">KrishiHut</a></p>
+  </div>
+</div>
+
+<div class="footer">
+  <div>© 2025 MediAura. All Rights Reserved.</div>
+  <div>Developed by <b>Team_NULL()</b></div>
+</div>
+
+
+<script>
+function openModal(id) {
+  document.getElementById(id).style.display = 'block';
+}
+function closeModal(id) {
+  document.getElementById(id).style.display = 'none';
+}
+window.onclick = function(event) {
+  const modals = document.querySelectorAll('.modal');
+  modals.forEach(modal => {
+    if (event.target === modal) modal.style.display = 'none';
+  });
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

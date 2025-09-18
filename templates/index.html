@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MedAura</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <style>
+        .logo {
+            width: 50px;
+            height: 50px;
+            color: brown;
+            margin-top: 0;
+            margin-left: 2;
+        }
+
+        .myimg {
+            width: 50px;
+            height: 50px;
+            border: 2px solid black;
+            border-radius: 25px;
+        }
+body {
+            background: linear-gradient(135deg, #fff 0%, #e8e8e8 50%, #b71c1c 200%);
+            color: #333;
+            font-family: 'Poppins', sans-serif;
+        }
+        .info-button {
+            width: 160px;
+            height: 60px;
+            font-size: 20px;
+            font-weight: 600;
+            border: none;
+            border-radius: 15px;
+            color: white;
+            margin: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .info-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .disease-btn { background: #FF6F61; }
+        .description-btn { background: #3498DB; }
+        .precaution-btn { background: #9B59B6; }
+        .medications-btn { background: #E67E22; }
+        .workouts-btn { background: #2ECC71; }
+        .diets-btn { background: #F1C40F; color: black; }
+
+        .footer {
+            position: fixed;
+            left: 0; bottom: 0;
+            width: 100%;
+            background-color: brown;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 20px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        #overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+    display: none;
+}
+
+.spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #e74c3c;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+</style>
+    </style>
+</head>
+
+<body>
+
+<div id="overlay">
+    <div class="spinner"></div>
+</div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div class="logo"><img class="myimg" src="static/image.png" alt=""></div>
+            <a class="navbar-brand" href="welcome.html">MedAura</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav me-auto my-2 my-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="/index">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">About</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/about_us">About Us</a></li>
+                            <li><a class="dropdown-item" href="/about_doctors">About Doctors</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" />
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <h1 class="text-center">MediAura</h1>
+
+ <div class="container my-4" style="background: black; color: white; border-radius: 15px; padding: 40px;">
+    <form id="predictForm" action="/predict" method="post">
+        <div class="form-group">
+            <label for="symptoms">Enter Symptoms (comma-separated):</label>
+            <input type="text" class="form-control" id="symptoms" name="symptoms" placeholder="e.g. headache, vomiting, fever">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-danger btn-lg w-100" id="submitBtn">
+            Predict
+        </button>
+    </form>
+
+    {% if message %}
+        <div class="alert alert-warning mt-3">{{ message }}</div>
+    {% endif %}
+</div>
+
+    {% if predicted_disease %}
+    <h1 class="text-center my-4">Our AI System Results</h1>
+    <div class="container text-center">
+        <button class="info-button disease-btn" data-bs-toggle="modal" data-bs-target="#diseaseModal">Disease</button>
+        <button class="info-button description-btn" data-bs-toggle="modal" data-bs-target="#descriptionModal">Description</button>
+        <button class="info-button precaution-btn" data-bs-toggle="modal" data-bs-target="#precautionModal">Precaution</button>
+        <button class="info-button medications-btn" data-bs-toggle="modal" data-bs-target="#medicationsModal">Medications</button>
+        <button class="info-button workouts-btn" data-bs-toggle="modal" data-bs-target="#workoutsModal">Workouts</button>
+        <button class="info-button diets-btn" data-bs-toggle="modal" data-bs-target="#dietsModal">Diets</button>
+    </div>
+
+    <!-- Disease Modal -->
+    <div class="modal fade" id="diseaseModal" tabindex="-1">
+        <div class="modal-dialog"><div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">Disease</h5></div>
+            <div class="modal-body">{{ predicted_disease }}</div>
+        </div></div>
+    </div>
+
+    <!-- Description Modal -->
+    <div class="modal fade" id="descriptionModal" tabindex="-1">
+        <div class="modal-dialog"><div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">Description</h5></div>
+            <div class="modal-body">{{ dis_des }}</div>
+        </div></div>
+    </div>
+
+    <!-- Precaution Modal -->
+    <div class="modal fade" id="precautionModal" tabindex="-1">
+        <div class="modal-dialog"><div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">Precautions</h5></div>
+            <div class="modal-body">
+                <ul>{% for p in my_precautions %}<li>{{ p }}</li>{% endfor %}</ul>
+            </div>
+        </div></div>
+    </div>
+
+    <!-- Medications Modal -->
+    <div class="modal fade" id="medicationsModal" tabindex="-1">
+        <div class="modal-dialog"><div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">Medications</h5></div>
+            <div class="modal-body">
+                <ul>{% for m in medications %}<li>{{ m }}</li>{% endfor %}</ul>
+            </div>
+        </div></div>
+    </div>
+
+    <!-- Workouts Modal -->
+    <div class="modal fade" id="workoutsModal" tabindex="-1">
+        <div class="modal-dialog"><div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">Workouts</h5></div>
+            <div class="modal-body">
+                <ul>{% for w in workout %}<li>{{ w }}</li>{% endfor %}</ul>
+            </div>
+        </div></div>
+    </div>
+
+    <!-- Diets Modal -->
+    <div class="modal fade" id="dietsModal" tabindex="-1">
+        <div class="modal-dialog"><div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title">Diets</h5></div>
+            <div class="modal-body">
+                <ul>{% for d in my_diet %}<li>{{ d }}</li>{% endfor %}</ul>
+            </div>
+        </div></div>
+    </div>
+    {% endif %}
+
+    <div class="footer">
+        <div>© 2025 MediAura. All Rights Reserved.</div>
+        <div>Developed by <b>Team_NULL()</b></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+   <script>
+    const form = document.getElementById('predictForm');
+    const overlay = document.getElementById('overlay');
+
+    form.addEventListener('submit', function () {
+        overlay.style.display = 'block';
+    });
+</script>
+
+
+
+</body>
+</html>

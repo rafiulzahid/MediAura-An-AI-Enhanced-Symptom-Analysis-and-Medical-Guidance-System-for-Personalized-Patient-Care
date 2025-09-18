@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MediaAura Chatbot</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: linear-gradient(to right, #f0f4f8, #e6f0ff);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    header {
+      background: #0077b6;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    #chatbox {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      border-radius: 10px;
+    }
+
+    .message {
+      margin: 10px 0;
+      padding: 12px 15px;
+      border-radius: 10px;
+      max-width: 70%;
+      line-height: 1.4;
+    }
+
+    .user {
+      background: #0077b6;
+      color: white;
+      margin-left: auto;
+      text-align: right;
+    }
+
+    .bot {
+      background: #e1f5fe;
+      color: #004d66;
+      margin-right: auto;
+      text-align: left;
+      border: 1px solid #b3e5fc;
+    }
+
+    .source {
+      font-size: 0.75em;
+      color: gray;
+      margin-top: 4px;
+      text-align: left;
+    }
+
+    .chat-input {
+      display: flex;
+      padding: 15px;
+      background: #fff;
+      border-top: 1px solid #ccc;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .chat-input button {
+      margin-left: 10px;
+      padding: 12px 20px;
+      background: #0077b6;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .chat-input button:hover {
+      background: #005f87;
+    }
+  </style>
+</head>
+<body>
+  <header>🧠 MediAura Medical Q/A</header>
+
+  <div id="chatbox"></div>
+
+  <div class="chat-input">
+    <input type="text" id="user_input" placeholder="Ask a medical question..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <script>
+    async function sendMessage() {
+      const msg = document.getElementById("user_input").value.trim();
+      if (!msg) return;
+
+      // Show user's message
+      document.getElementById("chatbox").innerHTML += `<div class="message user"><b>You:</b> ${msg}</div>`;
+
+      // Call Flask API
+      const res = await fetch("/chatbot_api", {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ msg })
+      });
+
+      const data = await res.json();
+
+      // Show bot's reply
+      document.getElementById("chatbox").innerHTML += `<div class="message bot"><b>Bot:</b> ${data.response}</div>`;
+
+      // Show sources if available
+      if (data.sources && data.sources.length) {
+        document.getElementById("chatbox").innerHTML += `<div class="source"><b>Sources:</b> ${data.sources.join(", ")}</div>`;
+      }
+
+      // Clear input and scroll down
+      document.getElementById("user_input").value = "";
+      document.getElementById("chatbox").scrollTop = document.getElementById("chatbox").scrollHeight;
+    }
+  </script>
+
+
+</body>
+</html>

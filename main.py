@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import openai
+# import openai
 import numpy as np
 import pandas as pd
 import pickle
@@ -12,10 +12,6 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-
-
-# flask app
-app = Flask(__name__)
 
 # Load datasets
 sym_des = pd.read_csv("datasets/symtoms_df.csv")
@@ -129,5 +125,9 @@ def chatbot_api():
 
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+import os
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
+

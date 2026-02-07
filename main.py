@@ -14,7 +14,7 @@ CORS(app)
 
 
 # Load datasets
-sym_des = pd.read_csv("data_csv/symtoms_df.csv")
+sym_des = pd.read_csv("data_csv/symptoms_df.csv")
 precautions = pd.read_csv("data_csv/precautions_df.csv")
 workout = pd.read_csv("data_csv/workout_df.csv")
 description = pd.read_csv("data_csv/description.csv")
@@ -128,6 +128,6 @@ def chatbot_api():
 import os
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
 
